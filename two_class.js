@@ -110,3 +110,13 @@ class Inimigo extends Obj{
         grupoTirosInimigo.push(new TiroInimigo(this.x - 40 + this.w, this.y + 40, 30, 40, './assets/tiro.png')) 
     }
 }
+
+class Text{
+    //arrumar o text depois
+    des_text(text,x,y,cor,font){
+        des.fillStyle = cor
+        des.lineWidth = '5'
+        des.font = font
+        des.fillText(text,x,y)
+    }
+}
