@@ -1,3 +1,35 @@
+class Obj{
+    constructor(x,y,w,h,a){
+        this.x = x
+        this.y = y
+        this.w = w
+        this.h = h
+        this.a = a
+    }
+    des_obj(){
+        des.fillStyle = this.a
+        des.fillRect(this.x,this.y,this.w,this.h,this.a)
+    }
+
+    des_img(){
+        let img = new Image()
+        img.src = this.a
+        des.drawImage(img,this.x, this.y, this.w, this.h)
+    }
+
+    colid(objeto) {
+        if((this.x < objeto.x + objeto.w)&&
+            (this.x + this.w > objeto.x)&&
+            (this.y < objeto.y + objeto.h)&&
+            (this.y + this.h > objeto.y)){
+            return true     
+        }else{
+            return false
+        }
+    }
+
+}
+
 class Player extends Obj{
     dir = 0
     pts = 0
@@ -108,6 +140,49 @@ class Inimigo extends Obj{
 
     atira(){
         grupoTirosInimigo.push(new TiroInimigo(this.x - 40 + this.w, this.y + 40, 30, 40, './assets/tiro.png')) 
+    }
+}
+
+class Tiro extends Obj{
+    constructor(x,y,w,h,a,velX,velY){
+        super(x,y,w,h,a) //pega os parametros do Obj
+        this.velX = velX
+        this.velY = velY
+        this.frame = 1
+        this.tempo = 0
+    }
+    anim(nome){
+        this.tempo +=1
+        if(this.tempo > 5){
+            this.tempo = 0
+            this.frame += 1
+        }
+        if(this.frame>4){
+            this.frame = 1
+        }
+        this.a = "assets/"+nome+this.frame+".png"
+    }
+
+    mov(){
+        this.x += this.velX
+        this.y += this.velY
+    }
+    des_tiro(){
+        let img = new Image()
+        img.src = this.a
+        des.drawImage(img,this.x, this.y, this.w, this.h)
+    }
+}
+
+class TiroInimigo extends Obj{
+    des_tiro(){
+        let img = new Image()
+        img.src = this.a
+        des.drawImage(img,this.x, this.y, this.w, this.h)
+    }
+
+    mov(){
+        this.y += 3
     }
 }
 
