@@ -2,7 +2,6 @@ class Player extends Obj{
     dir = 0
     pts = 0
     vida = 4
-
     
     des_vida(){ //desenha a barra de vida
         let vidaImg = new Image()
