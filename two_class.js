@@ -2,6 +2,11 @@ class Player extends Obj{
     dir = 0
     pts = 0
     vida = 4
+
+    speed = 0
+
+    frame = 1
+    tempo = 0
     
     des_vida(){ //desenha a barra de vida
         let vidaImg = new Image()
@@ -31,5 +36,27 @@ class Player extends Obj{
             this.frame = 1
         }
         this.a = "assets/"+nome+this.frame+".png"
+    }
+
+    mov(){
+        this.speed += this.dir * 0.1
+        this.speed *= 0.9; // suavizar o movimento
+        this.x += this.speed
+
+        // Velocidade máxima do jogador
+        if (this.speed > 3) {
+            this.speed = 3
+        } else if (this.speed < -3) {
+            this.speed = -3
+        }
+
+        //até onde o player pode andar
+        if(this.x <= 0){
+            this.x = 0
+            this.speed = 0
+        } else if(this.x >= 835){
+            this.x = 835
+            this.speed = 0
+        }
     }
 }
