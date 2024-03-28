@@ -6,6 +6,17 @@ let barra1 = new Obj(100,100,100,20,'./assets/vida_1.png')
 
 let jogar = false
 
+//Função para perder no jogo
+function game_over(){
+    if(player.vida <=0){
+        jogar = false
+//puxa os sons
+        sondtrack1.pause()
+        spell.pause()
+        reproduzirAudio(game_over1)
+    }
+}
+
 // sistema para reiniciar o jogo
 document.addEventListener('keydown', (e) => {
     if (e.key === 'Enter') {
@@ -14,7 +25,7 @@ document.addEventListener('keydown', (e) => {
     }
 })
 
-//quando aperta enter o jogo reinicia as variaveis
+//quando apertar enter o jogo reinicia as variaveis
 function reiniciarJogo() {
     player = new Player(100, 428, 120, 150, './assets/mago_1.png');
     grupoInimigo = [];
@@ -52,3 +63,28 @@ document.addEventListener('click', (event) => {
     grupoTiros.push(new Tiro(player.x - 60 + player.w, player.y - 40, 40, 40, './assets/tiro_1.png', velX, velY))
     //grupo de tiros sendo puxado
 })
+
+//Função para verificar o evento de tecla para iniciar o jogo
+function verificaInicioJogo(event){
+    if(event.key === 'Enter'){
+        cenaInicio = false; //Define cenaInicio como false para começar o jogo
+        reproduzirAudio(sondtrack1); //Inicia a trilha sonora do jogo
+    }
+}
+
+// Adiciona um event para verificar o evento de tecla
+document.addEventListener('keydown', verificaInicioJogo)
+
+// Função principal para desenhar e atualizar o jogo
+function main(){
+    if(cenaInicio){
+        desenhaTelaInicio();
+    }else{
+        des.clearRect(0, 0, 1300, 600);
+        desenha();
+        atualiza();
+    }
+    requestAnimationFrame(main);
+}
+
+main()
