@@ -20,4 +20,16 @@ class Player extends Obj{
 
         des.drawImage(vidaImg, 1005, 45, 150, 50) //onde o desenho vai ficar
     }
+
+    anim(nome){ //animação
+        this.tempo +=1
+        if(this.tempo > 5){
+            this.tempo = 0
+            this.frame += 1
+        }
+        if(this.frame>8){
+            this.frame = 1
+        }
+        this.a = "assets/"+nome+this.frame+".png"
+    }
 }
