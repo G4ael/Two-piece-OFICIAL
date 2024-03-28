@@ -4,7 +4,27 @@ let player = new Player(100,428,120,150,'./assets/mago_1.png')
 
 let barra1 = new Obj(100,100,100,20,'./assets/vida_1.png')
 
+let gato = new Obj(900, 240, 400, 400, './assets/gato_1.png')
+
 let jogar = false
+
+let cenaInicio = true
+
+//reproduz os som sem ter terminado o som anterior
+function reproduzirAudio(audio) {
+    audio.currentTime = 0 // Reinicia o áudio
+    audio.play()
+}
+//Função para perder no jogo
+function game_over(){
+    if(player.vida <=0){
+        jogar = false
+//puxa os sons
+        sondtrack1.pause()
+        spell.pause()
+        reproduzirAudio(game_over1)
+    }
+}
 
 //Função para perder no jogo
 function game_over(){
