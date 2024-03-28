@@ -1,12 +1,43 @@
 let des = document.getElementById('des').getContext('2d')
 
 let player = new Player(100,428,120,150,'./assets/mago_1.png')
-
-let barra1 = new Obj(100,100,100,20,'./assets/vida_1.png')
+let text1 = new Text() 
+let text2 = new Text() 
+let text3 = new Text() 
+let text4 = new Text()
+let text5 = new Text()
+let text6 = new Text()
 
 let gato = new Obj(900, 240, 400, 400, './assets/gato_1.png')
 
+let linha1 = new Obj(900, 0, 10, 610)
+let linha1_1 = new Obj(0, 0, 10, 610)
+let linha1_2 = new Obj(1275, 0, 10, 610)
+let linha2 = new Obj(10, 570, 890, 60, './assets/foor.png')
+let linha2_2 = new Obj(0, 610, 1350, 100)
+let linha3 = new Obj(0, -90, 1350, 100)
+
+let barra1 = new Obj(100,100,100,20,'./assets/vida_1.png')
+
+let bg = new Obj(0,0,900,621,'./assets/BG.png')
+let bg_inicio = new Obj(0,0,1300,621,'./assets/BG_inicio.png')
+
+let spell = new Audio('assets/spell.mp3')
+spell.volume = 0.4
+
+let dead = new Audio('./assets/dead.mp3')
+dead.volume = 0.4
+
+let sondtrack1 = new Audio('./assets/sondtrack1.mp3')
+sondtrack1.volume = 0.2
+sondtrack1.loop = true
+
+let game_over1 = new Audio('./assets/game_over1.mp3')
+game_over1.volume = 0.4
+
 let jogar = false
+
+let nivel = 1
 
 let cenaInicio = true
 
@@ -15,28 +46,6 @@ function reproduzirAudio(audio) {
     audio.currentTime = 0 // Reinicia o áudio
     audio.play()
 }
-//Função para perder no jogo
-function game_over(){
-    if(player.vida <=0){
-        jogar = false
-//puxa os sons
-        sondtrack1.pause()
-        spell.pause()
-        reproduzirAudio(game_over1)
-    }
-}
-
-//Função para perder no jogo
-function game_over(){
-    if(player.vida <=0){
-        jogar = false
-//puxa os sons
-        sondtrack1.pause()
-        spell.pause()
-        reproduzirAudio(game_over1)
-    }
-}
-
 // sistema para reiniciar o jogo
 document.addEventListener('keydown', (e) => {
     if (e.key === 'Enter') {
@@ -45,7 +54,7 @@ document.addEventListener('keydown', (e) => {
     }
 })
 
-//quando apertar enter o jogo reinicia as variaveis
+//quando aperta enter o jogo reinicia as variaveis
 function reiniciarJogo() {
     player = new Player(100, 428, 120, 150, './assets/mago_1.png');
     grupoInimigo = [];
@@ -57,7 +66,16 @@ function reiniciarJogo() {
     jogar = true;
     reproduzirAudio(sondtrack1)
 }
-
+//Função para perder no jogo
+function game_over(){
+    if(player.vida <=0){
+        jogar = false
+//puxa os sons
+        sondtrack1.pause()
+        spell.pause()
+        reproduzirAudio(game_over1)
+    }
+}
 //Função de atirar pelo mouse
 document.addEventListener('click', (event) => {
     reproduzirAudio(spell)
@@ -221,6 +239,29 @@ let inimigo = {
     }
 }
 
+//Movimento do player
+document.addEventListener('keydown',(e)=>{
+    if(e.key === 'a'){
+        player.dir = -15
+
+    } else if(e.key === 'd'){
+        player.dir = 15
+    }
+})
+
+document.addEventListener('keyup', (e)=>{
+    if(e.key === 'a' || e.key === 'd'){
+        player.dir = 0 // Parando o movimento quando a tecla for liberada
+    }
+})
+
+function atualizaNivel() { //Um novo nivel a cada 50 pts
+    if (player.pts >= nivel * 50) { //Verifica se o jogador atingiu um novo nível
+        nivel++ //Adiciona +1 no nivel
+    }
+}
+
+
 function desenha(){ //desenha todas as classes
     //sempre fica ativo
     bg.des_img()
@@ -287,12 +328,13 @@ function desenhaTelaInicio(){
     text6.des_text('PIECE', 620, 300, 'White', '80px Pixelify Sans')
     text6.des_text('TWO', 450, 300, 'green', '80px Pixelify Sans')
     text6.des_text('Pressione Enter para começar', 450, 350, 'White', '26px Pixelify Sans')
-
+    
     //desenha as linhas
     linha1_1.des_obj()
     linha1_2.des_obj()
     linha2_2.des_obj()
     linha3.des_obj()
+
 }
 
 //Função para verificar o evento de tecla para iniciar o jogo

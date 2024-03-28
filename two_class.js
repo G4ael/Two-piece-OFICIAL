@@ -34,12 +34,11 @@ class Player extends Obj{
     dir = 0
     pts = 0
     vida = 4
-
     speed = 0
 
     frame = 1
     tempo = 0
-    
+
     des_vida(){ //desenha a barra de vida
         let vidaImg = new Image()
 
@@ -93,15 +92,65 @@ class Player extends Obj{
     }
 }
 
-class Tiro extends Obj{
-    constructor(x,y,w,h,a,velX,velY){
-        super(x,y,w,h,a)//pega os parametros do Obj
-        this.frame = 1
-        this.tempo = 0
-        this.velX = velX
-        this.velY = velY
+class Inimigo extends Obj{
+    vida_inimigo = 5
+    pararY = 180  // posição onde o inimigo vai parar
+    tempoProximoTiro = Math.random() * 100 // tempo até o próximo tiro do inimigo
+    intervaloTiro = 60 // intervalo de tempo entre os tiros dos inimigos
+    tempoTiro = 0
+
+    tempo = 0
+    frame = 1
+
+    anim(nome){
+        this.tempo +=1
+        if(this.tempo > 40){
+            this.tempo = 0
+            this.frame += 1
+        }
+        if(this.frame>2){
+            this.frame = 1
+        }
+        this.a = "assets/"+nome+this.frame+".png"
     }
 
+    atual_inimigo(){
+        if(this.y <= this.pararY){
+            this.y += 0.5
+        }else if(this.vida_inimigo <= 0){
+            this.recomeca()
+        }
+
+        this.tempoTiro++
+        if(this.tempoTiro >= this.tempoProximoTiro){
+            this.tempoTiro = 0
+            this.atira()
+            this.tempoProximoTiro = Math.random() * 350 // define um novo tempo para o próximo tiro
+        }
+    }
+
+    vel = Math.random() * (2 - 0.5) + 0.5
+
+    mov(){
+        if(this.y <= this.pararY){
+            this.y += 0.5
+        }
+
+    }
+
+    atira(){
+        grupoTirosInimigo.push(new TiroInimigo(this.x - 40 + this.w, this.y + 40, 30, 40, './assets/tiro.png')) 
+    }
+}
+
+class Tiro extends Obj{
+    constructor(x,y,w,h,a,velX,velY){
+        super(x,y,w,h,a) //pega os parametros do Obj
+        this.velX = velX
+        this.velY = velY
+        this.frame = 1
+        this.tempo = 0
+    }
     anim(nome){
         this.tempo +=1
         if(this.tempo > 5){
@@ -111,19 +160,18 @@ class Tiro extends Obj{
         if(this.frame>4){
             this.frame = 1
         }
-
         this.a = "assets/"+nome+this.frame+".png"
     }
 
-        mov(){
-            this.x += this.velX
-            this.y += this.velY
-        }
-        des_tiro(){
-            let img = new Image()
-            img.src = this.a
-            des.drawImage(img,this.x, this.y, this.w, this.h)
-        }
+    mov(){
+        this.x += this.velX
+        this.y += this.velY
+    }
+    des_tiro(){
+        let img = new Image()
+        img.src = this.a
+        des.drawImage(img,this.x, this.y, this.w, this.h)
+    }
 }
 
 class TiroInimigo extends Obj{
@@ -138,23 +186,12 @@ class TiroInimigo extends Obj{
     }
 }
 
-class Obj{
-    constructor(x,y,w,h,a){
-        this.x = x
-        this.y = y
-        this.w = w
-        this.h = h
-        this.a = a
+class Text{
+    //arrumar o text depois
+    des_text(text,x,y,cor,font){
+        des.fillStyle = cor
+        des.lineWidth = '5'
+        des.font = font
+        des.fillText(text,x,y)
     }
-    des_obj(){
-
-    }
-
-    des_img(){
-
-    }
-
-    colid(objeto) {
-
-        }
-    }
+}
