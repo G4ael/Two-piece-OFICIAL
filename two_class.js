@@ -60,3 +60,19 @@ class Player extends Obj{
         }
     }
 }
+
+class Tiro extends Obj{
+    constructor(x,y,w,h,a,velX,velY){
+        super(x,y,w,h,a)//pega os parametros do Obj
+    }
+
+        mov(){
+            this.x += this.velX
+            this.y += this.velY
+        }
+        des_tiro(){
+            let img = new Image()
+            img.src = this.a
+            des.drawImage(img,this.x, this.y, this.w, this.h)
+        }
+}
