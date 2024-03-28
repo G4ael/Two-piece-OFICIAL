@@ -17,8 +17,8 @@ let linha2 = new Obj(10, 570, 890, 60, './assets/foor.png')
 let linha2_2 = new Obj(0, 610, 1350, 100)
 let linha3 = new Obj(0, -90, 1350, 100)
 
-let tutorial1 = new Obj(100, 250, 200, 200, './assets/wasd.png')
-let tutorial2 = new Obj(960, 205, 215, 215, './assets/mouse.png')
+let tutorial1 = new Obj(120, 250, 150, 150, './assets/wasd.png')
+let tutorial2 = new Obj(980, 205, 215, 215, './assets/mouse.png')
 
 let barra1 = new Obj(100,100,100,20,'./assets/vida_1.png')
 
@@ -339,7 +339,7 @@ function desenhaTelaInicio(){
     linha3.des_obj()
 
     tutorial1.des_img()
-    text6.des_text('Atirar', 1025, 250, 'White', '26px Pixelify Sans')
+    text6.des_text('Atirar', 1045, 250, 'White', '26px Pixelify Sans')
     tutorial2.des_img()
     text6.des_text('Movimento', 125, 250, 'White', '26px Pixelify Sans')
 
