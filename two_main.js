@@ -119,6 +119,21 @@ let inimigo = {
     }
 }
 
+//Movimento do player
+document.addEventListener('keydown',(e)=>{
+    if(e.key === 'a'){
+        player.dir = -15
+
+    } else if(e.key === 'd'){
+        player.dir = 15
+    }
+})
+
+document.addEventListener('keyup', (e)=>{
+    if(e.key === 'a' || e.key === 'd'){
+        player.dir = 0 // Parando o movimento quando a tecla for liberada
+    }
+})
 
 if(jogar){
     player.mov()
