@@ -1,0 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400..700&display=swap');
+body{
+    background-color: rgb(0, 0, 0);
+    color: rgb(194, 194, 194);
+    font-family: "Pixelify Sans", sans-serif;
+}
+div{
+    background-color: rgb(26, 26, 26);
+}
