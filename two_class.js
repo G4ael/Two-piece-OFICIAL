@@ -77,6 +77,8 @@ class Tiro extends Obj{
         if(this.frame>4){
             this.frame = 1
         }
+
+        this.a = "assets/"+nome+this.frame+".png"
     }
 
         mov(){
@@ -88,4 +90,16 @@ class Tiro extends Obj{
             img.src = this.a
             des.drawImage(img,this.x, this.y, this.w, this.h)
         }
+}
+
+class TiroInimigo extends Obj{
+    des_tiro(){
+        let img = new Image()
+        img.src = this.a
+        des.drawImage(img,this.x, this.y, this.w, this.h)
+    }
+
+    mov(){
+        this.y += 3
+    }
 }
