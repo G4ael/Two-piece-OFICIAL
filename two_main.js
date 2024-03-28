@@ -4,6 +4,29 @@ let player = new Player(100,428,120,150,'./assets/mago_1.png')
 
 let barra1 = new Obj(100,100,100,20,'./assets/vida_1.png')
 
+let jogar = false
+
+// sistema para reiniciar o jogo
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') {
+        reiniciarJogo();
+        // toda vez que apertar enter o jogo reinicia
+    }
+})
+
+//quando aperta enter o jogo reinicia as variaveis
+function reiniciarJogo() {
+    player = new Player(100, 428, 120, 150, './assets/mago_1.png');
+    grupoInimigo = [];
+    grupoTiros = [];
+    grupoTirosInimigo = [];
+    player.pts = 0;
+    player.vida = 4;
+    nivel = 1;
+    jogar = true;
+    reproduzirAudio(sondtrack1)
+}
+
 //Função de atirar pelo mouse
 document.addEventListener('click', (event) => {
     reproduzirAudio(spell)

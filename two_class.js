@@ -66,6 +66,8 @@ class Tiro extends Obj{
         super(x,y,w,h,a)//pega os parametros do Obj
         this.frame = 1
         this.tempo = 0
+        this.velX = velX
+        this.velY = velY
     }
 
     anim(nome){
