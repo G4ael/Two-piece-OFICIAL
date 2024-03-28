@@ -64,6 +64,19 @@ class Player extends Obj{
 class Tiro extends Obj{
     constructor(x,y,w,h,a,velX,velY){
         super(x,y,w,h,a)//pega os parametros do Obj
+        this.frame = 1
+        this.tempo = 0
+    }
+
+    anim(nome){
+        this.tempo +=1
+        if(this.tempo > 5){
+            this.tempo = 0
+            this.frame += 1
+        }
+        if(this.frame>4){
+            this.frame = 1
+        }
     }
 
         mov(){
