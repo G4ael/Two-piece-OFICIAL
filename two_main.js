@@ -221,6 +221,80 @@ let inimigo = {
     }
 }
 
+function desenha(){ //desenha todas as classes
+    //sempre fica ativo
+    bg.des_img()
+
+    gato.des_img()
+
+    text1.des_text('Pontos: ',950, 150, 'White', '26px Pixelify Sans')
+    text3.des_text(player.pts, 1060, 151, 'White', '26px Pixelify Sans')
+    text2.des_text('Vida: ',950, 80, 'White', '26px Pixelify Sans')
+    text2.des_text('Nível: ',950, 220, 'White', '26px Pixelify Sans')
+    text2.des_text(nivel ,1020, 220, 'White', '26px Pixelify Sans')
+
+    player.des_vida()
+
+    if(jogar){ //quando jogar for true desenha o player e os inimigos
+        inimigo.des()
+        tiros.des()
+
+        linha1.des_obj()
+        linha1_1.des_obj()
+        linha1_2.des_obj()
+        linha2.des_img() 
+        linha2_2.des_obj()
+        linha3.des_obj()
+
+        player.des_img()
+    }else{ //se o jogo não for true desenha apenas  as linhas e o text
+        linha1.des_obj()
+        linha1_1.des_obj()
+        linha1_2.des_obj()
+        linha2.des_img() 
+        linha2_2.des_obj()
+        linha3.des_obj()
+
+        text5.des_text('Game Over',340, 320, 'White', '55px Pixelify Sans')
+        text6.des_text('Pressione Enter para recomeçar', 265, 400, 'White', '26px Pixelify Sans');
+    }
+
+    
+}
+
+function atualiza(){ //faz a atualização das class e variaveis
+
+    if(jogar){
+        player.mov()
+        player.anim('mago_')
+        inimigo.atual()
+        inimigo.atual('Morcego_')
+        tiros.atual('tiro_')
+        tiros.atual()
+        game_over()
+        atualizaNivel()
+    }
+}
+
+// Função para desenhar a tela de introdução
+function desenhaTelaInicio(){
+
+    des.clearRect(0, 0, 1300, 600) //cria um quadrado para a tela de inicio
+
+    bg_inicio.des_img()
+
+    //faz o text
+    text6.des_text('PIECE', 620, 300, 'White', '80px Pixelify Sans')
+    text6.des_text('TWO', 450, 300, 'green', '80px Pixelify Sans')
+    text6.des_text('Pressione Enter para começar', 450, 350, 'White', '26px Pixelify Sans')
+
+    //desenha as linhas
+    linha1_1.des_obj()
+    linha1_2.des_obj()
+    linha2_2.des_obj()
+    linha3.des_obj()
+}
+
 //Função para verificar o evento de tecla para iniciar o jogo
 function verificaInicioJogo(event){
     if(event.key === 'Enter'){
