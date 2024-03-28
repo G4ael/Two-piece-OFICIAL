@@ -32,7 +32,7 @@ let dead = new Audio('./assets/dead.mp3')
 dead.volume = 0.4
 
 let sondtrack1 = new Audio('./assets/sondtrack1.mp3')
-sondtrack1.volume = 0.2
+sondtrack1.volume = 0.5
 sondtrack1.loop = true
 
 let game_over1 = new Audio('./assets/game_over1.mp3')
